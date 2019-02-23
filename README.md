@@ -6,7 +6,7 @@ Unofficial PKGBUILD for creating an [Arch Linux ARM](https://archlinuxarm.org/) 
 
 [Helios4](https://kobol.io/helios4/) is an powerful Open Source and Open Hardware Network Attached Storage (NAS) made by Kobol Innovations Pte. Ltd. It harnesses its processing capabilities from the **ARMADA 38x-MicroSoM** from SolidRun, an ARMv7 32-bit SoC.
 
-## Why make a specific Linux package? Couldn't I use the official linux-armv7 package?
+## Why make a specific Linux package for Helios4? Couldn't I use the official linux-armv7 package?
 
 You could use the official [linux-armv7 PKGBUILD](https://github.com/archlinuxarm/PKGBUILDs/tree/master/core/linux-armv7), but some features could not work as expected.
 
