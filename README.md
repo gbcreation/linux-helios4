@@ -17,6 +17,10 @@ Actually, the PKGBUILD provided by this repository is based on the linux-armv7 p
 
 Future goal is also to provide a Linux kernel optimizely configured for Helios4.
 
+## Are there prebuilt packages ready to install?
+
+Look at [releases](https://github.com/gbcreation/linux-helios4/releases).
+
 ## TODO
 
 - [ ] clean PKGBUILD
