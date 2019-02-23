@@ -71,8 +71,8 @@ prepare() {
   git apply ../0007-exynos4412-odroid-set-higher-minimum-buck2-regulator.patch
   git apply ../0008-ARM-dove-enable-ethernet-on-D3Plug.patch
   git apply ../0009-media-s5p-mfc-fix-incorrect-bus-assignment-in-virtua.patch
-  patch -p1 < ../92-mvebu-gpio-remove-hardcoded-timer-assignment.patch
-  patch -p1 < ../94-helios4-dts-add-wake-on-lan-support.patch
+  patch -Np1 < ../92-mvebu-gpio-remove-hardcoded-timer-assignment.patch
+  patch -Np1 < ../94-helios4-dts-add-wake-on-lan-support.patch
 
   cat "${srcdir}/config" > ./.config
 
