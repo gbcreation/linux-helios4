@@ -1,5 +1,6 @@
-# ARMv7 multi-platform
-# Maintainer: Kevin Mihelich <kevin@archlinuxarm.org>
+# ARMv7 Helios4
+# Repository: https://github.com/gbcreation/linux-helios4
+# Maintainer: Gontran Baerts
 
 buildarch=4
 
