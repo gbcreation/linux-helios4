@@ -32,6 +32,8 @@ source=("http://www.kernel.org/pub/linux/kernel/v4.x/${_srcname}.tar.xz"
         'linux.preset'
         '60-linux.hook'
         '90-linux.hook'
+	'https://raw.githubusercontent.com/armbian/build/master/patch/kernel/mvebu-next/91-01-libata-add-ledtrig-support.patch'
+	'https://raw.githubusercontent.com/armbian/build/master/patch/kernel/mvebu-next/91-02-Enable-ATA-port-LED-trigger.patch'
 	'https://raw.githubusercontent.com/armbian/build/master/patch/kernel/mvebu-dev/92-mvebu-gpio-remove-hardcoded-timer-assignment.patch'
 	'https://raw.githubusercontent.com/armbian/build/master/patch/kernel/mvebu-next/94-helios4-dts-add-wake-on-lan-support.patch')
 md5sums=('d39dd4ba2d5861c54b90d49be19eaf31'
@@ -50,6 +52,8 @@ md5sums=('d39dd4ba2d5861c54b90d49be19eaf31'
          '86d4a35722b5410e3b29fc92dae15d4b'
          'ce6c81ad1ad1f8b333fd6077d47abdaf'
          '3e2a512f8da5db5fe9f17875405e56a3'
+         '6613d49e406496156552df6475a3557b'
+         'b9a900b7da3c9a1a9d4b8d86db3f7c94'
          '3ff7f3714084854cbdcf28f2b64397de'
          '5876ccfe05a07b64661556ea4fae4b59')
 
@@ -72,6 +76,8 @@ prepare() {
   git apply ../0007-exynos4412-odroid-set-higher-minimum-buck2-regulator.patch
   git apply ../0008-ARM-dove-enable-ethernet-on-D3Plug.patch
   git apply ../0009-media-s5p-mfc-fix-incorrect-bus-assignment-in-virtua.patch
+  patch -Np1 < ../91-01-libata-add-ledtrig-support.patch
+  patch -Np1 < ../91-02-Enable-ATA-port-LED-trigger.patch
   patch -Np1 < ../92-mvebu-gpio-remove-hardcoded-timer-assignment.patch
   patch -Np1 < ../94-helios4-dts-add-wake-on-lan-support.patch
 
