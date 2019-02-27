@@ -21,9 +21,21 @@ Future goal is also to provide a Linux kernel optimizely configured for Helios4.
 
 Look at [releases](https://github.com/gbcreation/linux-helios4/releases).
 
+## Known bugs
+
+- LEDs do not light up on disk access.
+
 ## TODO
 
 - [ ] clean PKGBUILD
 - [ ] use a kernel configuration file optimized for Helios4
 - [ ] remove useless patches provided by the linux-armv7 PKGBUILD
+
+## Thanks
+
+Thanks to:
+
+- the Kobol Team for this great piece of Open Hardware that is Helios4 NAS
+- Aditya from the Kobol Team for his valuable help on explaining various patches and configuration files
+- Summers from the Arch Linux ARM forum for his precious advices and encouraging responses
 
