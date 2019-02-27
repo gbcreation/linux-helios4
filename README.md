@@ -12,6 +12,7 @@ You could use the official [linux-armv7 PKGBUILD](https://github.com/archlinuxar
 
 Actually, the PKGBUILD provided by this repository is based on the linux-armv7 package. It contains the following additional patches which are initially provided by the Kobol Team for Armbian, and are not merged to the upstream kernel yet:
 
+* [91-01-libata-add-ledtrig-support.patch](https://github.com/armbian/build/blob/master/patch/kernel/mvebu-next/91-01-libata-add-ledtrig-support.patch) and [91-02-Enable-ATA-port-LED-trigger.patch](https://github.com/armbian/build/blob/master/patch/kernel/mvebu-next/91-02-Enable-ATA-port-LED-trigger.patch): add support for LED trigger on disk activity
 * [92-mvebu-gpio-remove-hardcoded-timer-assignment.patch](https://github.com/armbian/build/blob/master/patch/kernel/mvebu-dev/92-mvebu-gpio-remove-hardcoded-timer-assignment.patch): allows to make the second fan detected by the kernel.
 * [94-helios4-dts-add-wake-on-lan-support.patch](https://github.com/armbian/build/blob/master/patch/kernel/mvebu-next/94-helios4-dts-add-wake-on-lan-support.patch): add Wake-on-LAN support for Helios4 (not tested).
 
@@ -23,7 +24,7 @@ Look at [releases](https://github.com/gbcreation/linux-helios4/releases).
 
 ## Known bugs
 
-- LEDs do not light up on disk access.
+- ~~LEDs do not light up on disk access.~~ (fixed since 4.20.12-1)
 
 ## TODO
 
