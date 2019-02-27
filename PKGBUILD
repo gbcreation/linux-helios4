@@ -8,9 +8,9 @@ pkgbase=linux-helios4
 _srcname=linux-4.20
 _kernelname=${pkgbase#linux}
 _desc="ARMv7 Helios4"
-pkgver=4.20.11
+pkgver=4.20.12
 pkgrel=1
-rcnrel=armv7-x7
+rcnrel=armv7-x8
 arch=('armv7h')
 url="http://www.kernel.org/"
 license=('GPL2')
@@ -37,8 +37,8 @@ source=("http://www.kernel.org/pub/linux/kernel/v4.x/${_srcname}.tar.xz"
 	'https://raw.githubusercontent.com/armbian/build/master/patch/kernel/mvebu-dev/92-mvebu-gpio-remove-hardcoded-timer-assignment.patch'
 	'https://raw.githubusercontent.com/armbian/build/master/patch/kernel/mvebu-next/94-helios4-dts-add-wake-on-lan-support.patch')
 md5sums=('d39dd4ba2d5861c54b90d49be19eaf31'
-         'b8faceed2182f048279e400846df8ab7'
-         '85cd6dfbc36edbfa4332d3b1ab108d49'
+         '18fa4ebb3fe20e06eaa3cb5a2f4cdbf7'
+         'be20ca0f31fa3b6dc53f7b3cbbdcf4f8'
          'a9f76b75f18f89d535bbbe357c08f70e'
          '40708505c237608fbc3923a714f8ffcb'
          '339f1a7d7242c8639f33f6acd370f761'
@@ -48,7 +48,7 @@ md5sums=('d39dd4ba2d5861c54b90d49be19eaf31'
          'c5fce59d890676702244170c2736dcb1'
          '2907befef7c5dc788ceb5a99fdefd23c'
          '2faa70647c4965b32e9f0f597614fcbf'
-         '03e4bb583e097db87e7a966c12749442'
+         '1ad17d1fdf815682013cf5a894549168'
          '86d4a35722b5410e3b29fc92dae15d4b'
          'ce6c81ad1ad1f8b333fd6077d47abdaf'
          '3e2a512f8da5db5fe9f17875405e56a3'
