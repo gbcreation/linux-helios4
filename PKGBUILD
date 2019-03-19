@@ -5,19 +5,19 @@
 buildarch=4
 
 pkgbase=linux-helios4
-_srcname=linux-4.20
+_srcname=linux-5.0
 _kernelname=${pkgbase#linux}
 _desc="ARMv7 Helios4"
-pkgver=4.20.13
-pkgrel=2
-rcnrel=armv7-x9
+pkgver=5.0.1
+pkgrel=1
+rcnrel=armv7-x3
 arch=('armv7h')
 url="http://www.kernel.org/"
 license=('GPL2')
 makedepends=('kmod' 'inetutils' 'bc' 'git' 'dtc')
 options=('!strip')
-source=("http://www.kernel.org/pub/linux/kernel/v4.x/${_srcname}.tar.xz"
-        "http://www.kernel.org/pub/linux/kernel/v4.x/patch-${pkgver}.xz"
+source=("http://www.kernel.org/pub/linux/kernel/v5.x/${_srcname}.tar.xz"
+        "http://www.kernel.org/pub/linux/kernel/v5.x/patch-${pkgver}.xz"
         "http://rcn-ee.com/deb/sid-armhf/v${pkgver}-${rcnrel}/patch-${pkgver%.0}-${rcnrel}.diff.gz"
         '0001-ARM-atags-add-support-for-Marvell-s-u-boot.patch'
         '0002-ARM-atags-fdt-retrieve-MAC-addresses-from-Marvell-bo.patch'
@@ -34,28 +34,28 @@ source=("http://www.kernel.org/pub/linux/kernel/v4.x/${_srcname}.tar.xz"
         '90-linux.hook'
 	'https://raw.githubusercontent.com/armbian/build/master/patch/kernel/mvebu-next/91-01-libata-add-ledtrig-support.patch'
 	'https://raw.githubusercontent.com/armbian/build/master/patch/kernel/mvebu-next/91-02-Enable-ATA-port-LED-trigger.patch'
-	'https://raw.githubusercontent.com/armbian/build/master/patch/kernel/mvebu-dev/92-mvebu-gpio-remove-hardcoded-timer-assignment.patch'
+	'92-mvebu-gpio-remove-hardcoded-timer-assignment.patch'
 	'https://raw.githubusercontent.com/armbian/build/master/patch/kernel/mvebu-next/92-mvebu-gpio-add_wake_on_gpio_support.patch'
 	'https://raw.githubusercontent.com/armbian/build/master/patch/kernel/mvebu-next/94-helios4-dts-add-wake-on-lan-support.patch')
-md5sums=('d39dd4ba2d5861c54b90d49be19eaf31'
-         '78dfc42ffc09125aac594827977953ab'
-         '8bd39626ab6cdb64964cb13ecac27475'
-         'a9f76b75f18f89d535bbbe357c08f70e'
-         '40708505c237608fbc3923a714f8ffcb'
-         '339f1a7d7242c8639f33f6acd370f761'
-         'f276f1bfdd926516db36c81096eb6914'
-         '32ba1be48b4305dde4a3503097f1ad10'
-         '37c972c5bc79514b85846d5f1b13838a'
-         'c5fce59d890676702244170c2736dcb1'
-         '2907befef7c5dc788ceb5a99fdefd23c'
-         '2faa70647c4965b32e9f0f597614fcbf'
-         '1ad17d1fdf815682013cf5a894549168'
+md5sums=('7381ce8aac80a01448e065ce795c19c0'
+         '488f0f1b00a0861b4c3ddf578f1bd548'
+         '7da240e8310b58209fdaa691316cdae1'
+         '186d831eddea59ab5cc7c62cc4696897'
+         'd9a7a634715fa7219159573bd61d3ff7'
+         '495ec4bfb1e4a12cca55a3c9bde58bdc'
+         'f6d51f34eabdfd602ddff70bc3e7d143'
+         '4987fdc657955965451e44202eb4e5ac'
+         '9940571a36c300290c158267430c541e'
+         '5a4a3385293b0d6b156f393a2c685475'
+         'e4a4d30642990394812eb996de6705d5'
+         '21170922884a1ab0aa7d0711e1012b5f'
+         '7a451d0d67a881606127233a3848eb90'
          '86d4a35722b5410e3b29fc92dae15d4b'
          'ce6c81ad1ad1f8b333fd6077d47abdaf'
          '3e2a512f8da5db5fe9f17875405e56a3'
          '6613d49e406496156552df6475a3557b'
          'b9a900b7da3c9a1a9d4b8d86db3f7c94'
-         '3ff7f3714084854cbdcf28f2b64397de'
+         '5aa8f19e3d2e23e475282525f36fe454'
          'b338409db059f5a38bc333372223f1cc'
          '5876ccfe05a07b64661556ea4fae4b59')
 
