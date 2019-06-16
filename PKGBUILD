@@ -5,19 +5,19 @@
 buildarch=4
 
 pkgbase=linux-helios4
-_srcname=linux-5.0
+_srcname=linux-5.1
 _kernelname=${pkgbase#linux}
 _desc="ARMv7 Helios4"
-pkgver=5.0.10
+pkgver=5.1.0
 pkgrel=1
-rcnrel=armv7-x11
+rcnrel=armv7-x1
 arch=('armv7h')
 url="http://www.kernel.org/"
 license=('GPL2')
 makedepends=('kmod' 'inetutils' 'bc' 'git' 'dtc')
 options=('!strip')
 source=("http://www.kernel.org/pub/linux/kernel/v5.x/${_srcname}.tar.xz"
-        "http://www.kernel.org/pub/linux/kernel/v5.x/patch-${pkgver}.xz"
+        #"http://www.kernel.org/pub/linux/kernel/v5.x/patch-${pkgver}.xz"
         "http://rcn-ee.com/deb/sid-armhf/v${pkgver}-${rcnrel}/patch-${pkgver%.0}-${rcnrel}.diff.gz"
         '0001-ARM-atags-add-support-for-Marvell-s-u-boot.patch'
         '0002-ARM-atags-fdt-retrieve-MAC-addresses-from-Marvell-bo.patch'
@@ -27,7 +27,6 @@ source=("http://www.kernel.org/pub/linux/kernel/v5.x/${_srcname}.tar.xz"
         '0006-set-default-cubietruck-led-triggers.patch'
         '0007-exynos4412-odroid-set-higher-minimum-buck2-regulator.patch'
         '0008-ARM-dove-enable-ethernet-on-D3Plug.patch'
-        '0009-media-s5p-mfc-fix-incorrect-bus-assignment-in-virtua.patch'
         'config'
         'linux.preset'
         '60-linux.hook'
@@ -37,9 +36,8 @@ source=("http://www.kernel.org/pub/linux/kernel/v5.x/${_srcname}.tar.xz"
 	'92-mvebu-gpio-remove-hardcoded-timer-assignment.patch'
 	'https://raw.githubusercontent.com/armbian/build/master/patch/kernel/mvebu-next/92-mvebu-gpio-add_wake_on_gpio_support.patch'
 	'https://raw.githubusercontent.com/armbian/build/master/patch/kernel/mvebu-next/94-helios4-dts-add-wake-on-lan-support.patch')
-md5sums=('7381ce8aac80a01448e065ce795c19c0'
-         'a46bbfe17039c1fa81edc847af5ea664'
-         '596941c675b7b8a692336e4882f12ebd'
+md5sums=('15fbdff95ff98483069ac6e215b9f4f9'
+         '65f19a6bf5b7f132f2ebd48193c8bf47'
          '186d831eddea59ab5cc7c62cc4696897'
          'd9a7a634715fa7219159573bd61d3ff7'
          '495ec4bfb1e4a12cca55a3c9bde58bdc'
@@ -48,8 +46,7 @@ md5sums=('7381ce8aac80a01448e065ce795c19c0'
          '9940571a36c300290c158267430c541e'
          '5a4a3385293b0d6b156f393a2c685475'
          'e4a4d30642990394812eb996de6705d5'
-         '21170922884a1ab0aa7d0711e1012b5f'
-         '1592f1bc962ff8f74b3d7077b2827aaa'
+         'a80989b2199953ed814bc7db14c88420'
          '86d4a35722b5410e3b29fc92dae15d4b'
          'ce6c81ad1ad1f8b333fd6077d47abdaf'
          '3e2a512f8da5db5fe9f17875405e56a3'
@@ -63,7 +60,7 @@ prepare() {
   cd "${srcdir}/${_srcname}"
 
   # add upstream patch
-  git apply --whitespace=nowarn ../patch-${pkgver}
+  #git apply --whitespace=nowarn ../patch-${pkgver}
 
   # RCN patch
   git apply ../patch-${pkgver%.0}-${rcnrel}.diff
@@ -77,7 +74,6 @@ prepare() {
   git apply ../0006-set-default-cubietruck-led-triggers.patch
   git apply ../0007-exynos4412-odroid-set-higher-minimum-buck2-regulator.patch
   git apply ../0008-ARM-dove-enable-ethernet-on-D3Plug.patch
-  git apply ../0009-media-s5p-mfc-fix-incorrect-bus-assignment-in-virtua.patch
   patch -Np1 < ../91-01-libata-add-ledtrig-support.patch
   patch -Np1 < ../91-02-Enable-ATA-port-LED-trigger.patch
   patch -Np1 < ../92-mvebu-gpio-remove-hardcoded-timer-assignment.patch
