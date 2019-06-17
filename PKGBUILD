@@ -8,16 +8,16 @@ pkgbase=linux-helios4
 _srcname=linux-5.1
 _kernelname=${pkgbase#linux}
 _desc="ARMv7 Helios4"
-pkgver=5.1.0
+pkgver=5.1.1
 pkgrel=1
-rcnrel=armv7-x1
+rcnrel=armv7-x2
 arch=('armv7h')
 url="http://www.kernel.org/"
 license=('GPL2')
 makedepends=('kmod' 'inetutils' 'bc' 'git' 'dtc')
 options=('!strip')
 source=("http://www.kernel.org/pub/linux/kernel/v5.x/${_srcname}.tar.xz"
-        #"http://www.kernel.org/pub/linux/kernel/v5.x/patch-${pkgver}.xz"
+        "http://www.kernel.org/pub/linux/kernel/v5.x/patch-${pkgver}.xz"
         "http://rcn-ee.com/deb/sid-armhf/v${pkgver}-${rcnrel}/patch-${pkgver%.0}-${rcnrel}.diff.gz"
         '0001-ARM-atags-add-support-for-Marvell-s-u-boot.patch'
         '0002-ARM-atags-fdt-retrieve-MAC-addresses-from-Marvell-bo.patch'
@@ -37,15 +37,16 @@ source=("http://www.kernel.org/pub/linux/kernel/v5.x/${_srcname}.tar.xz"
 	'https://raw.githubusercontent.com/armbian/build/master/patch/kernel/mvebu-next/92-mvebu-gpio-add_wake_on_gpio_support.patch'
 	'https://raw.githubusercontent.com/armbian/build/master/patch/kernel/mvebu-next/94-helios4-dts-add-wake-on-lan-support.patch')
 md5sums=('15fbdff95ff98483069ac6e215b9f4f9'
-         '65f19a6bf5b7f132f2ebd48193c8bf47'
-         '186d831eddea59ab5cc7c62cc4696897'
-         'd9a7a634715fa7219159573bd61d3ff7'
-         '495ec4bfb1e4a12cca55a3c9bde58bdc'
-         'f6d51f34eabdfd602ddff70bc3e7d143'
-         '4987fdc657955965451e44202eb4e5ac'
-         '9940571a36c300290c158267430c541e'
-         '5a4a3385293b0d6b156f393a2c685475'
-         'e4a4d30642990394812eb996de6705d5'
+         'f63ecf14cdf6c7407b4ee8a9dfe49e3e'
+         'd652238514c86cb5a35ca23a32b72b71'
+         '2200b611940b67e43be161055c48e092'
+         '74ee346c9c71145fa84f1a9c7f4bbea0'
+         'e052bf1c5d21e6cd2890109dbbbd788d'
+         '8dd34e9cf68282a9683a7dbce92f517c'
+         '4ef1f863914c829334c1f35f1c8294e9'
+         '1d66498df88eca2360ff3d3a640add48'
+         '5761a8951e9dcb01b4f631c0d92f2e03'
+         'd2dee481fdde72aea9111e93c090bd69'
          'a80989b2199953ed814bc7db14c88420'
          '86d4a35722b5410e3b29fc92dae15d4b'
          'ce6c81ad1ad1f8b333fd6077d47abdaf'
@@ -60,7 +61,7 @@ prepare() {
   cd "${srcdir}/${_srcname}"
 
   # add upstream patch
-  #git apply --whitespace=nowarn ../patch-${pkgver}
+  git apply --whitespace=nowarn ../patch-${pkgver}
 
   # RCN patch
   git apply ../patch-${pkgver%.0}-${rcnrel}.diff
