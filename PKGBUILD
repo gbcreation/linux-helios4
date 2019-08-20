@@ -8,7 +8,7 @@ pkgbase=linux-helios4
 _srcname=linux-5.2
 _kernelname=${pkgbase#linux}
 _desc="ARMv7 Helios4"
-pkgver=5.2.5
+pkgver=5.2.6
 pkgrel=1
 rcnver=5.2.5
 rcnrel=armv7-x3
@@ -38,7 +38,7 @@ source=("http://www.kernel.org/pub/linux/kernel/v5.x/${_srcname}.tar.xz"
 	'https://raw.githubusercontent.com/armbian/build/master/patch/kernel/mvebu-next/92-mvebu-gpio-add_wake_on_gpio_support.patch'
 	'https://raw.githubusercontent.com/armbian/build/master/patch/kernel/mvebu-next/94-helios4-dts-add-wake-on-lan-support.patch')
 md5sums=('ddf994de00d7b18395886dd9b30b9262'
-         '0bfed20acab24d45232983b54339a3c9'
+         'cb6b16b6e8c5cde725bc589cd5f13927'
          'ef32c9bf05aeff66073c09255a526b32'
          '2200b611940b67e43be161055c48e092'
          '74ee346c9c71145fa84f1a9c7f4bbea0'
