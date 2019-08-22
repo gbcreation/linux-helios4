@@ -1,6 +1,6 @@
 #
 # Automatically generated file; DO NOT EDIT.
-# Linux/arm 5.2.5-1 Kernel Configuration
+# Linux/arm 5.2.9-1 Kernel Configuration
 #
 
 #
@@ -7684,7 +7684,7 @@ CONFIG_GENERIC_PHY_MIPI_DPHY=y
 # CONFIG_PHY_FSL_IMX8MQ_USB is not set
 # CONFIG_PHY_MVEBU_A3700_COMPHY is not set
 # CONFIG_PHY_MVEBU_A3700_UTMI is not set
-# CONFIG_PHY_MVEBU_A38X_COMPHY is not set
+CONFIG_PHY_MVEBU_A38X_COMPHY=m
 # CONFIG_PHY_MVEBU_CP110_COMPHY is not set
 # CONFIG_PHY_PXA_28NM_HSIC is not set
 # CONFIG_PHY_PXA_28NM_USB2 is not set
@@ -8126,8 +8126,8 @@ CONFIG_INTEGRITY=y
 CONFIG_INTEGRITY_AUDIT=y
 # CONFIG_IMA is not set
 # CONFIG_EVM is not set
-CONFIG_DEFAULT_SECURITY_SMACK=y
-# CONFIG_DEFAULT_SECURITY_DAC is not set
+# CONFIG_DEFAULT_SECURITY_SMACK is not set
+CONFIG_DEFAULT_SECURITY_DAC=y
 CONFIG_LSM="yama,loadpin,safesetid,integrity,selinux,smack,tomoyo,apparmor"
 
 #

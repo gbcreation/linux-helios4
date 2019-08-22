@@ -8,7 +8,7 @@ pkgbase=linux-helios4
 _srcname=linux-5.2
 _kernelname=${pkgbase#linux}
 _desc="ARMv7 Helios4"
-pkgver=5.2.8
+pkgver=5.2.9
 pkgrel=1
 rcnver=5.2.8
 rcnrel=armv7-x4
@@ -29,6 +29,7 @@ source=("http://www.kernel.org/pub/linux/kernel/v5.x/${_srcname}.tar.xz"
         '0007-exynos4412-odroid-set-higher-minimum-buck2-regulator.patch'
         '0008-ARM-dove-enable-ethernet-on-D3Plug.patch'
         '0009-USB-Armory-MkII-support.patch'
+        '0010-clk-imx-keep-the-mmdc-p1-ipg-clock-always-on-on-6sx-.patch'
         'config'
         'linux.preset'
         '60-linux.hook'
@@ -39,18 +40,19 @@ source=("http://www.kernel.org/pub/linux/kernel/v5.x/${_srcname}.tar.xz"
         'https://raw.githubusercontent.com/armbian/build/master/patch/kernel/mvebu-next/92-mvebu-gpio-add_wake_on_gpio_support.patch'
         'https://raw.githubusercontent.com/armbian/build/master/patch/kernel/mvebu-next/94-helios4-dts-add-wake-on-lan-support.patch')
 md5sums=('ddf994de00d7b18395886dd9b30b9262'
-         '86638e3bb71b4b0494d4c7f0851a54b1'
+         '8e44c6541cfd15b87906eaf2ce91a3b9'
          'c458cd95b46b24009eca6913811787b4'
-         'b9d2372088c32964b2bdc96e46a57afd'
-         'f91b44793e8c165bc0570e766026dbc6'
-         '261bd38adfe70160110ab62e4cee06b1'
-         '936e0312b7c6d8caa6948561316f3716'
-         '192ac0e0a2e0deb9be7a44bf8e0d5d55'
-         '00e08b46ea27bf5e86e0759ad82167a3'
-         'cd057ac1fd556431c3967418964c00d0'
-         'd341a73a1f3a81ff59529c8ba5c72c78'
-         'e39b3034b10b64eeda1d7ad0779cd36f'
-         'ff528d39079d1022dfa82f40f7e5fc66'
+         'bef82432bcc94e7553774321433a5192'
+         '9f7cdf923b9dd093e4cf63550962b4e9'
+         'ce5b6cf01ab9f9b65c9699cd9bebf4b1'
+         'c796077757ad5ca02764d421bc349849'
+         'f01e98dba279885735d2956acab54d6b'
+         '2a46185236b864a985b80f159d00ee32'
+         '74de7f3027ec96a25db9f0b2c52347ab'
+         'c33c9c332eae5c8fa807090379745d4a'
+         '78e337c2ef4ef76582f422e3e6a2c20c'
+         '20ab4c15289741e57b6a394a75f799df'
+         '9272ff413b8fddd2573de06a6a5ec0e5'
          '86d4a35722b5410e3b29fc92dae15d4b'
          'ce6c81ad1ad1f8b333fd6077d47abdaf'
          '3e2a512f8da5db5fe9f17875405e56a3'
@@ -79,6 +81,7 @@ prepare() {
   git apply ../0007-exynos4412-odroid-set-higher-minimum-buck2-regulator.patch
   git apply ../0008-ARM-dove-enable-ethernet-on-D3Plug.patch
   git apply ../0009-USB-Armory-MkII-support.patch
+  git apply ../0010-clk-imx-keep-the-mmdc-p1-ipg-clock-always-on-on-6sx-.patch
   patch -Np1 < ../91-01-libata-add-ledtrig-support.patch
   patch -Np1 < ../91-02-Enable-ATA-port-LED-trigger.patch
   patch -Np1 < ../92-mvebu-gpio-remove-hardcoded-timer-assignment.patch
