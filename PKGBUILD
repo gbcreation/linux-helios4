@@ -8,10 +8,10 @@ pkgbase=linux-helios4
 _srcname=linux-5.2
 _kernelname=${pkgbase#linux}
 _desc="ARMv7 Helios4"
-pkgver=5.2.9
+pkgver=5.2.10
 pkgrel=1
-rcnver=5.2.8
-rcnrel=armv7-x4
+rcnver=5.2.9
+rcnrel=armv7-x5
 arch=('armv7h')
 url="http://www.kernel.org/"
 license=('GPL2')
@@ -28,20 +28,20 @@ source=("http://www.kernel.org/pub/linux/kernel/v5.x/${_srcname}.tar.xz"
         '0006-set-default-cubietruck-led-triggers.patch'
         '0007-exynos4412-odroid-set-higher-minimum-buck2-regulator.patch'
         '0008-ARM-dove-enable-ethernet-on-D3Plug.patch'
-        '0009-USB-Armory-MkII-support.patch'
+	'0009-USB-Armory-MkII-support.patch'
         '0010-clk-imx-keep-the-mmdc-p1-ipg-clock-always-on-on-6sx-.patch'
         'config'
         'linux.preset'
         '60-linux.hook'
         '90-linux.hook'
-        'https://raw.githubusercontent.com/armbian/build/master/patch/kernel/mvebu-next/91-01-libata-add-ledtrig-support.patch'
-        'https://raw.githubusercontent.com/armbian/build/master/patch/kernel/mvebu-next/91-02-Enable-ATA-port-LED-trigger.patch'
-        '92-mvebu-gpio-remove-hardcoded-timer-assignment.patch'
-        'https://raw.githubusercontent.com/armbian/build/master/patch/kernel/mvebu-next/92-mvebu-gpio-add_wake_on_gpio_support.patch'
-        'https://raw.githubusercontent.com/armbian/build/master/patch/kernel/mvebu-next/94-helios4-dts-add-wake-on-lan-support.patch')
+	'https://raw.githubusercontent.com/armbian/build/master/patch/kernel/mvebu-next/91-01-libata-add-ledtrig-support.patch'
+	'https://raw.githubusercontent.com/armbian/build/master/patch/kernel/mvebu-next/91-02-Enable-ATA-port-LED-trigger.patch'
+	'92-mvebu-gpio-remove-hardcoded-timer-assignment.patch'
+	'https://raw.githubusercontent.com/armbian/build/master/patch/kernel/mvebu-next/92-mvebu-gpio-add_wake_on_gpio_support.patch'
+	'https://raw.githubusercontent.com/armbian/build/master/patch/kernel/mvebu-next/94-helios4-dts-add-wake-on-lan-support.patch')
 md5sums=('ddf994de00d7b18395886dd9b30b9262'
-         '8e44c6541cfd15b87906eaf2ce91a3b9'
-         'c458cd95b46b24009eca6913811787b4'
+         '7c9a170cf18a9ab1d2e005b2d206d9bc'
+         'f32edc341c6e2ce170be25bc589bff6e'
          'bef82432bcc94e7553774321433a5192'
          '9f7cdf923b9dd093e4cf63550962b4e9'
          'ce5b6cf01ab9f9b65c9699cd9bebf4b1'
@@ -52,7 +52,7 @@ md5sums=('ddf994de00d7b18395886dd9b30b9262'
          'c33c9c332eae5c8fa807090379745d4a'
          '78e337c2ef4ef76582f422e3e6a2c20c'
          '20ab4c15289741e57b6a394a75f799df'
-         '9272ff413b8fddd2573de06a6a5ec0e5'
+         '1ffc4da6e11f6971ab30440ae28e8849'
          '86d4a35722b5410e3b29fc92dae15d4b'
          'ce6c81ad1ad1f8b333fd6077d47abdaf'
          '3e2a512f8da5db5fe9f17875405e56a3'
@@ -188,112 +188,72 @@ _package-headers() {
   conflicts=('linux-headers')
   replaces=('linux-mvebu-headers' 'linux-sun4i-headers' 'linux-sun5i-headers' 'linux-sun7i-headers' 'linux-usbarmory-headers' 'linux-wandboard-headers' 'linux-clearfog-headers')
 
-  install -dm755 "${pkgdir}/usr/lib/modules/${_kernver}"
+  cd ${_srcname}
+  local _builddir="${pkgdir}/usr/lib/modules/${_kernver}/build"
 
-  cd "${srcdir}/${_srcname}"
-  install -D -m644 Makefile \
-    "${pkgdir}/usr/lib/modules/${_kernver}/build/Makefile"
-  install -D -m644 kernel/Makefile \
-    "${pkgdir}/usr/lib/modules/${_kernver}/build/kernel/Makefile"
-  install -D -m644 .config \
-    "${pkgdir}/usr/lib/modules/${_kernver}/build/.config"
+  install -Dt "${_builddir}" -m644 Makefile .config Module.symvers
+  install -Dt "${_builddir}/kernel" -m644 kernel/Makefile
 
-  mkdir -p "${pkgdir}/usr/lib/modules/${_kernver}/build/include"
+  mkdir "${_builddir}/.tmp_versions"
 
-  for i in acpi asm-generic config crypto drm generated keys linux math-emu \
-    media net pcmcia scsi soc sound trace uapi video xen; do
-    cp -a include/${i} "${pkgdir}/usr/lib/modules/${_kernver}/build/include/"
-  done
+  cp -t "${_builddir}" -a include scripts
 
-  # copy arch includes for external modules
-  mkdir -p ${pkgdir}/usr/lib/modules/${_kernver}/build/arch/$KARCH
-  cp -a arch/$KARCH/include ${pkgdir}/usr/lib/modules/${_kernver}/build/arch/$KARCH/
+  install -Dt "${_builddir}/arch/${KARCH}" -m644 arch/${KARCH}/Makefile
+  install -Dt "${_builddir}/arch/${KARCH}/kernel" -m644 arch/${KARCH}/kernel/asm-offsets.s arch/$KARCH/kernel/module.lds
+
+  cp -t "${_builddir}/arch/${KARCH}" -a arch/${KARCH}/include
   for i in dove exynos omap2; do
-    mkdir -p ${pkgdir}/usr/lib/modules/${_kernver}/build/arch/$KARCH/mach-${i}
-    cp -a arch/$KARCH/mach-${i}/include ${pkgdir}/usr/lib/modules/${_kernver}/build/arch/$KARCH/mach-${i}/
+    mkdir -p "${_builddir}/arch/${KARCH}/mach-${i}"
+    cp -t "${_builddir}/arch/${KARCH}/mach-${i}" -a arch/$KARCH/mach-${i}/include
   done
   for i in omap orion samsung versatile; do
-    mkdir -p ${pkgdir}/usr/lib/modules/${_kernver}/build/arch/$KARCH/plat-${i}
-    cp -a arch/$KARCH/plat-${i}/include ${pkgdir}/usr/lib/modules/${_kernver}/build/arch/$KARCH/plat-${i}/
+    mkdir -p "${_builddir}/arch/${KARCH}/plat-${i}"
+    cp -t "${_builddir}/arch/${KARCH}/plat-${i}" -a arch/$KARCH/plat-${i}/include
   done
 
-  # copy files necessary for later builds, like nvidia and vmware
-  cp Module.symvers "${pkgdir}/usr/lib/modules/${_kernver}/build"
-  cp -a scripts "${pkgdir}/usr/lib/modules/${_kernver}/build"
-
-  # fix permissions on scripts dir
-  chmod og-w -R "${pkgdir}/usr/lib/modules/${_kernver}/build/scripts"
-  mkdir -p "${pkgdir}/usr/lib/modules/${_kernver}/build/.tmp_versions"
-
-  mkdir -p "${pkgdir}/usr/lib/modules/${_kernver}/build/arch/${KARCH}/kernel"
-
-  cp arch/${KARCH}/Makefile "${pkgdir}/usr/lib/modules/${_kernver}/build/arch/${KARCH}/"
-
-  cp arch/${KARCH}/kernel/asm-offsets.s "${pkgdir}/usr/lib/modules/${_kernver}/build/arch/${KARCH}/kernel/"
-
-  # add dm headers
-  mkdir -p "${pkgdir}/usr/lib/modules/${_kernver}/build/drivers/md"
-  cp drivers/md/*.h "${pkgdir}/usr/lib/modules/${_kernver}/build/drivers/md"
-
-  # add inotify.h
-  mkdir -p "${pkgdir}/usr/lib/modules/${_kernver}/build/include/linux"
-  cp include/linux/inotify.h "${pkgdir}/usr/lib/modules/${_kernver}/build/include/linux/"
-
-  # add wireless headers
-  mkdir -p "${pkgdir}/usr/lib/modules/${_kernver}/build/net/mac80211/"
-  cp net/mac80211/*.h "${pkgdir}/usr/lib/modules/${_kernver}/build/net/mac80211/"
-
-  # add dvb headers for external modules
-  # in reference to:
-  # http://bugs.archlinux.org/task/11194
-  mkdir -p "${pkgdir}/usr/lib/modules/${_kernver}/build/include/config/dvb/"
-  cp include/config/dvb/*.h "${pkgdir}/usr/lib/modules/${_kernver}/build/include/config/dvb/"
-
-  # add dvb headers for http://mcentral.de/hg/~mrec/em28xx-new
-  # in reference to:
+  install -Dt "${_builddir}/drivers/md" -m644 drivers/md/*.h
+  install -Dt "${_builddir}/net/mac80211" -m644 net/mac80211/*.h
   # http://bugs.archlinux.org/task/13146
-  mkdir -p "${pkgdir}/usr/lib/modules/${_kernver}/build/drivers/media/dvb-frontends/"
-  cp drivers/media/dvb-frontends/lgdt330x.h "${pkgdir}/usr/lib/modules/${_kernver}/build/drivers/media/dvb-frontends/"
-  mkdir -p "${pkgdir}/usr/lib/modules/${_kernver}/build/drivers/media/i2c/"
-  cp drivers/media/i2c/msp3400-driver.h "${pkgdir}/usr/lib/modules/${_kernver}/build/drivers/media/i2c/"
+  install -Dt "${_builddir}/drivers/media/i2c" -m644 drivers/media/i2c/msp3400-driver.h
 
-  # add dvb headers
-  # in reference to:
   # http://bugs.archlinux.org/task/20402
-  mkdir -p "${pkgdir}/usr/lib/modules/${_kernver}/build/drivers/media/usb/dvb-usb"
-  cp drivers/media/usb/dvb-usb/*.h "${pkgdir}/usr/lib/modules/${_kernver}/build/drivers/media/usb/dvb-usb/"
-  mkdir -p "${pkgdir}/usr/lib/modules/${_kernver}/build/drivers/media/dvb-frontends"
-  cp drivers/media/dvb-frontends/*.h "${pkgdir}/usr/lib/modules/${_kernver}/build/drivers/media/dvb-frontends/"
-  mkdir -p "${pkgdir}/usr/lib/modules/${_kernver}/build/drivers/media/tuners"
-  cp drivers/media/tuners/*.h "${pkgdir}/usr/lib/modules/${_kernver}/build/drivers/media/tuners/"
+  install -Dt "${_builddir}/drivers/media/usb/dvb-usb" -m644 drivers/media/usb/dvb-usb/*.h
+  install -Dt "${_builddir}/drivers/media/dvb-frontends" -m644 drivers/media/dvb-frontends/*.h
+  install -Dt "${_builddir}/drivers/media/tuners" -m644 drivers/media/tuners/*.h
 
   # add xfs and shmem for aufs building
-  mkdir -p "${pkgdir}/usr/lib/modules/${_kernver}/build/fs/xfs"
-  mkdir -p "${pkgdir}/usr/lib/modules/${_kernver}/build/mm"
+  mkdir -p "${_builddir}"/{fs/xfs,mm}
 
   # copy in Kconfig files
-  for i in $(find . -name "Kconfig*"); do
-    mkdir -p "${pkgdir}"/usr/lib/modules/${_kernver}/build/`echo ${i} | sed 's|/Kconfig.*||'`
-    cp ${i} "${pkgdir}/usr/lib/modules/${_kernver}/build/${i}"
-  done
-
-  chown -R root.root "${pkgdir}/usr/lib/modules/${_kernver}/build"
-  find "${pkgdir}/usr/lib/modules/${_kernver}/build" -type d -exec chmod 755 {} \;
-
-  # strip scripts directory
-  find "${pkgdir}/usr/lib/modules/${_kernver}/build/scripts" -type f -perm -u+w 2>/dev/null | while read binary ; do
-    case "$(file -bi "${binary}")" in
-      *application/x-sharedlib*) # Libraries (.so)
-        /usr/bin/strip ${STRIP_SHARED} "${binary}";;
-      *application/x-archive*) # Libraries (.a)
-        /usr/bin/strip ${STRIP_STATIC} "${binary}";;
-      *application/x-executable*) # Binaries
-        /usr/bin/strip ${STRIP_BINARIES} "${binary}";;
-    esac
-  done
+  find . -name Kconfig\* -exec install -Dm644 {} "${_builddir}/{}" \;
 
   # remove unneeded architectures
-  rm -rf "${pkgdir}"/usr/lib/modules/${_kernver}/build/arch/{alpha,arc,arm26,arm64,avr32,blackfin,c6x,cris,frv,h8300,hexagon,ia64,m32r,m68k,m68knommu,metag,mips,microblaze,mn10300,openrisc,parisc,powerpc,ppc,s390,score,sh,sh64,sparc,sparc64,tile,unicore32,um,v850,x86,xtensa}
+  local _arch
+  for _arch in "${_builddir}"/arch/*/; do
+    [[ ${_arch} == */${KARCH}/ ]] && continue
+    rm -r "${_arch}"
+  done
+
+  # remove files already in linux-docs package
+  rm -r "${_builddir}/Documentation"
+
+  # remove now broken symlinks
+  find -L "${_builddir}" -type l -printf 'Removing %P\n' -delete
+
+  # Fix permissions
+  chmod -R u=rwX,go=rX "${_builddir}"
+
+  # strip scripts directory
+  local _binary _strip
+  while read -rd '' _binary; do
+    case "$(file -bi "${_binary}")" in
+      *application/x-sharedlib*)  _strip="${STRIP_SHARED}"   ;; # Libraries (.so)
+      *application/x-archive*)    _strip="${STRIP_STATIC}"   ;; # Libraries (.a)
+      *application/x-executable*) _strip="${STRIP_BINARIES}" ;; # Binaries
+      *) continue ;;
+    esac
+    /usr/bin/strip ${_strip} "${_binary}"
+  done < <(find "${_builddir}/scripts" -type f -perm -u+w -print0 2>/dev/null)
 }
 
 pkgname=("${pkgbase}" "${pkgbase}-headers")
