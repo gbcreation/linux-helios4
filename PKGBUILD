@@ -9,9 +9,9 @@ _srcname=linux-5.2
 _kernelname=${pkgbase#linux}
 _desc="ARMv7 Helios4"
 pkgver=5.2.10
-pkgrel=1
-rcnver=5.2.9
-rcnrel=armv7-x5
+pkgrel=2
+rcnver=5.2.10
+rcnrel=armv7-x6
 arch=('armv7h')
 url="http://www.kernel.org/"
 license=('GPL2')
@@ -41,17 +41,17 @@ source=("http://www.kernel.org/pub/linux/kernel/v5.x/${_srcname}.tar.xz"
 	'https://raw.githubusercontent.com/armbian/build/master/patch/kernel/mvebu-next/94-helios4-dts-add-wake-on-lan-support.patch')
 md5sums=('ddf994de00d7b18395886dd9b30b9262'
          '7c9a170cf18a9ab1d2e005b2d206d9bc'
-         'f32edc341c6e2ce170be25bc589bff6e'
-         'bef82432bcc94e7553774321433a5192'
-         '9f7cdf923b9dd093e4cf63550962b4e9'
-         'ce5b6cf01ab9f9b65c9699cd9bebf4b1'
-         'c796077757ad5ca02764d421bc349849'
-         'f01e98dba279885735d2956acab54d6b'
-         '2a46185236b864a985b80f159d00ee32'
-         '74de7f3027ec96a25db9f0b2c52347ab'
-         'c33c9c332eae5c8fa807090379745d4a'
-         '78e337c2ef4ef76582f422e3e6a2c20c'
-         '20ab4c15289741e57b6a394a75f799df'
+         '635bc8fe92286294ab942c371757f458'
+         '3a438ea4ec18674e839088aba5a010e8'
+         '3c7d208e8d2514064804840853458554'
+         'bba33bc98ccb7ed84214efefab0037a1'
+         '48ab87b5ca829602b26f6a32f299870c'
+         '4adbc558097f076822be5003572ae63e'
+         '4bc88592c8ae5fae88ea42563418c501'
+         '703882ad134f4402ed4ee8190b9ebb7e'
+         '3883c9e0cf320c6355afc124ef058c2d'
+         'd5b1239bcfb0a612a7194553699b4319'
+         '6427cd863fd9051dce3dccbc657d596d'
          '1ffc4da6e11f6971ab30440ae28e8849'
          '86d4a35722b5410e3b29fc92dae15d4b'
          'ce6c81ad1ad1f8b333fd6077d47abdaf'

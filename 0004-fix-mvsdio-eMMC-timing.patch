@@ -1,4 +1,4 @@
-From c0a8c786ab5cd65319a330d264d1cf5485b77939 Mon Sep 17 00:00:00 2001
+From 9e042330733ac4ad8fdf8e487046fcff933ea3f3 Mon Sep 17 00:00:00 2001
 From: Kevin Mihelich <kevin@archlinuxarm.org>
 Date: Fri, 5 Sep 2014 15:43:56 -0600
 Subject: [PATCH 04/10] fix mvsdio eMMC timing
@@ -35,3 +35,4 @@ index 74a0a7fbbf7f..92eadb116762 100644
  		host->ns_per_clk = 1000000000 / (host->base_clock / (m+1));
 -- 
 2.22.0
+
