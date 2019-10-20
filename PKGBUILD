@@ -72,7 +72,7 @@ prepare() {
   git apply -v --whitespace=nowarn ../patch-${pkgver}
 
   # RCN patch
-  git apply -v ../patch-${rcnver%.0}-${rcnrel}.diff
+  zcat ../patch-${rcnver%.0}-${rcnrel}.diff.gz | git apply -v
 
   # ALARM patches
   git apply -v ../0001-ARM-atags-add-support-for-Marvell-s-u-boot.patch
