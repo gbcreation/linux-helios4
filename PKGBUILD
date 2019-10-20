@@ -5,13 +5,13 @@
 buildarch=4
 
 pkgbase=linux-helios4
-_srcname=linux-5.2
+_srcname=linux-5.3
 _kernelname=${pkgbase#linux}
 _desc="ARMv7 Helios4"
-pkgver=5.2.14
+pkgver=5.3.7
 pkgrel=1
-rcnver=5.2.13
-rcnrel=armv7-x9
+rcnver=5.3.6
+rcnrel=armv7-x12
 arch=('armv7h')
 url="http://www.kernel.org/"
 license=('GPL2')
@@ -28,37 +28,35 @@ source=("http://www.kernel.org/pub/linux/kernel/v5.x/${_srcname}.tar.xz"
         '0006-set-default-cubietruck-led-triggers.patch'
         '0007-exynos4412-odroid-set-higher-minimum-buck2-regulator.patch'
         '0008-ARM-dove-enable-ethernet-on-D3Plug.patch'
-	'0009-USB-Armory-MkII-support.patch'
-        '0010-clk-imx-keep-the-mmdc-p1-ipg-clock-always-on-on-6sx-.patch'
+        '0009-USB-Armory-MkII-support.patch'
         'config'
         'linux.preset'
         '60-linux.hook'
         '90-linux.hook'
-	'https://raw.githubusercontent.com/armbian/build/master/patch/kernel/mvebu-next/91-01-libata-add-ledtrig-support.patch'
-	'https://raw.githubusercontent.com/armbian/build/master/patch/kernel/mvebu-next/91-02-Enable-ATA-port-LED-trigger.patch'
-	'92-mvebu-gpio-remove-hardcoded-timer-assignment.patch'
-	'https://raw.githubusercontent.com/armbian/build/master/patch/kernel/mvebu-next/92-mvebu-gpio-add_wake_on_gpio_support.patch'
-	'https://raw.githubusercontent.com/armbian/build/master/patch/kernel/mvebu-next/94-helios4-dts-add-wake-on-lan-support.patch')
-md5sums=('ddf994de00d7b18395886dd9b30b9262'
-         'cdaffbebb53e51b862ba1b959a0da859'
-         '50220d3817e198ef313100b3170d1163'
-         '3a438ea4ec18674e839088aba5a010e8'
-         '3c7d208e8d2514064804840853458554'
-         'bba33bc98ccb7ed84214efefab0037a1'
-         '48ab87b5ca829602b26f6a32f299870c'
-         '4adbc558097f076822be5003572ae63e'
-         '4bc88592c8ae5fae88ea42563418c501'
-         '703882ad134f4402ed4ee8190b9ebb7e'
-         '3883c9e0cf320c6355afc124ef058c2d'
-         'd5b1239bcfb0a612a7194553699b4319'
-         '6427cd863fd9051dce3dccbc657d596d'
-         'cf614fa1cda8325c7310ad51e6454e81'
+        'https://raw.githubusercontent.com/armbian/build/master/patch/kernel/mvebu-next/91-01-libata-add-ledtrig-support.patch'
+        'https://raw.githubusercontent.com/armbian/build/master/patch/kernel/mvebu-next/91-02-Enable-ATA-port-LED-trigger.patch'
+        '92-mvebu-gpio-remove-hardcoded-timer-assignment.patch'
+        'https://raw.githubusercontent.com/armbian/build/master/patch/kernel/mvebu-next/92-mvebu-gpio-add_wake_on_gpio_support.patch'
+        'https://raw.githubusercontent.com/armbian/build/master/patch/kernel/mvebu-next/94-helios4-dts-add-wake-on-lan-support.patch')
+md5sums=('c99feaade8047339528fb066ec5f8a49'
+         '380185019ba22d3d2eac85b5678729bd'
+         '96ce5450a943cfddc07e456851b3bb27'
+         'f989c450907a0af28867b38dc0a1112e'
+         '884c3ef691a300cd2b0c704d795130c3'
+         'd9ab3a3d50a3684b6f13c5c1c8c23dbe'
+         '65449dc8fa2b45522135899c5e8acaed'
+         'c5a2831b832c726ba65077b69a8bc8e7'
+         '196a7cb2a570808dabfd22066646dbab'
+         '118d67de1d31194435b5564c36b0c57f'
+         '7334902800f72a0d17c26bef373d2c49'
+         '065e0eb93091edeea111c1c1f6e8fb44'
+         'bf79d7b6106f27f72295205be6b81ee0'
          '86d4a35722b5410e3b29fc92dae15d4b'
          'ce6c81ad1ad1f8b333fd6077d47abdaf'
          '3e2a512f8da5db5fe9f17875405e56a3'
-         '6613d49e406496156552df6475a3557b'
-         'b9a900b7da3c9a1a9d4b8d86db3f7c94'
-         '5aa8f19e3d2e23e475282525f36fe454'
+         'a637eedf6a13d4c9f8cd024c13f6b62a'
+         '779c884ae9854df32e8ced0e86359649'
+         '174539df2ce061e9bbd7db0fe5ef7fb6'
          'b338409db059f5a38bc333372223f1cc'
          '5876ccfe05a07b64661556ea4fae4b59')
 
@@ -84,7 +82,6 @@ prepare() {
   git apply -v ../0007-exynos4412-odroid-set-higher-minimum-buck2-regulator.patch
   git apply -v ../0008-ARM-dove-enable-ethernet-on-D3Plug.patch
   git apply -v ../0009-USB-Armory-MkII-support.patch
-  git apply -v ../0010-clk-imx-keep-the-mmdc-p1-ipg-clock-always-on-on-6sx-.patch
   patch -Np1 < ../91-01-libata-add-ledtrig-support.patch
   patch -Np1 < ../91-02-Enable-ATA-port-LED-trigger.patch
   patch -Np1 < ../92-mvebu-gpio-remove-hardcoded-timer-assignment.patch
