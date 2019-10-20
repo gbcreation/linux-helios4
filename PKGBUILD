@@ -65,23 +65,26 @@ md5sums=('ddf994de00d7b18395886dd9b30b9262'
 prepare() {
   cd "${srcdir}/${_srcname}"
 
+  # needed for git-apply to work when parent directory (e.g. PKGBUILD) is a git-repository
+  export GIT_DIR="${srcdir}/${_srcname}"
+
   # add upstream patch
-  git apply --whitespace=nowarn ../patch-${pkgver}
+  git apply -v --whitespace=nowarn ../patch-${pkgver}
 
   # RCN patch
-  git apply ../patch-${rcnver%.0}-${rcnrel}.diff
+  git apply -v ../patch-${rcnver%.0}-${rcnrel}.diff
 
   # ALARM patches
-  git apply ../0001-ARM-atags-add-support-for-Marvell-s-u-boot.patch
-  git apply ../0002-ARM-atags-fdt-retrieve-MAC-addresses-from-Marvell-bo.patch
-  git apply ../0003-SMILE-Plug-device-tree-file.patch
-  git apply ../0004-fix-mvsdio-eMMC-timing.patch
-  git apply ../0005-net-smsc95xx-Allow-mac-address-to-be-set-as-a-parame.patch
-  git apply ../0006-set-default-cubietruck-led-triggers.patch
-  git apply ../0007-exynos4412-odroid-set-higher-minimum-buck2-regulator.patch
-  git apply ../0008-ARM-dove-enable-ethernet-on-D3Plug.patch
-  git apply ../0009-USB-Armory-MkII-support.patch
-  git apply ../0010-clk-imx-keep-the-mmdc-p1-ipg-clock-always-on-on-6sx-.patch
+  git apply -v ../0001-ARM-atags-add-support-for-Marvell-s-u-boot.patch
+  git apply -v ../0002-ARM-atags-fdt-retrieve-MAC-addresses-from-Marvell-bo.patch
+  git apply -v ../0003-SMILE-Plug-device-tree-file.patch
+  git apply -v ../0004-fix-mvsdio-eMMC-timing.patch
+  git apply -v ../0005-net-smsc95xx-Allow-mac-address-to-be-set-as-a-parame.patch
+  git apply -v ../0006-set-default-cubietruck-led-triggers.patch
+  git apply -v ../0007-exynos4412-odroid-set-higher-minimum-buck2-regulator.patch
+  git apply -v ../0008-ARM-dove-enable-ethernet-on-D3Plug.patch
+  git apply -v ../0009-USB-Armory-MkII-support.patch
+  git apply -v ../0010-clk-imx-keep-the-mmdc-p1-ipg-clock-always-on-on-6sx-.patch
   patch -Np1 < ../91-01-libata-add-ledtrig-support.patch
   patch -Np1 < ../91-02-Enable-ATA-port-LED-trigger.patch
   patch -Np1 < ../92-mvebu-gpio-remove-hardcoded-timer-assignment.patch
